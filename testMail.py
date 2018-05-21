@@ -41,4 +41,9 @@ def main():
 	count = query_count()
 	send_email(count, 'mikewxp@163.com')
 	print("sendMain Done")
-main()
+
+import time
+import os
+while True:
+	main()
+	time.sleep(3*3600)  #每3小时统计一次 发邮件
