@@ -46,4 +46,4 @@ import time
 import os
 while True:
 	main()
-	time.sleep(3*3600)  #每3小时统计一次 发邮件
+	time.sleep(1.5*3600)  #每3小时统计一次 发邮件
