@@ -12,12 +12,18 @@ class ZhihuSpider(Spider):
     follows_url = 'https://www.zhihu.com/api/v4/members/{user}/followees?include={include}&offset={offset}&limit={limit}'
     followers_url = 'https://www.zhihu.com/api/v4/members/{user}/followers?include={include}&offset={offset}&limit={limit}'
     #start_user = 'excited-vczh'
-    start_user = 'jixin'
+    #start_user = 'jixin'
+    start_user = 'gejinyuban'
     #start_user_2 = 'zhang-jia-wei'
-    start_user_2 = 'zhouyuan'
-    start_user_3 = 'ding-xiang-yi-sheng'
-    start_user_4 = 'imike'
-    
+    #start_user_2 = 'zhouyuan'
+    start_user_2 = 'ma-bo-yong'
+    #start_user_3 = 'ding-xiang-yi-sheng'
+    start_user_3 = 'wang-ni-ma-94'
+    #start_user_4 = 'imike'
+    start_user_4 = 'zhu-xuan-86'
+    start_user_5 = 'sizhuren'
+    start_user_6 = 'cai-tong'
+    #gejinyuban,ma-bo-yong,wang-ni-ma-94,zhu-xuan-86,sizhuren,cai-tong
     #jixin,zhouyuan,ding-xiang-yi-sheng,imike,zhang-jia-wei
 
     user_query = 'locations,employments,gender,educations,business,voteup_count,thanked_Count,follower_count,following_count,cover_url,following_topic_count,following_question_count,following_favlists_count,following_columns_count,answer_count,articles_count,pins_count,question_count,commercial_question_count,favorite_count,favorited_count,logs_count,marked_answers_count,marked_answers_text,message_thread_token,account_status,is_active,is_force_renamed,is_bind_sina,sina_weibo_url,sina_weibo_name,show_sina_weibo,is_blocking,is_blocked,is_following,is_followed,mutual_followees_count,vote_to_count,vote_from_count,thank_to_count,thank_from_count,thanked_count,description,hosted_live_count,participated_live_count,allow_message,industry_category,org_name,org_homepage,badge[?(type=best_answerer)].topics'
@@ -31,16 +37,22 @@ class ZhihuSpider(Spider):
         yield Request(self.user_url.format(user=self.start_user_2, include=self.user_query), self.parse_user)
         yield Request(self.user_url.format(user=self.start_user_3, include=self.user_query), self.parse_user)
         yield Request(self.user_url.format(user=self.start_user_4, include=self.user_query), self.parse_user)
+        yield Request(self.user_url.format(user=self.start_user_5, include=self.user_query), self.parse_user)
+        yield Request(self.user_url.format(user=self.start_user_6, include=self.user_query), self.parse_user)
         
         yield Request(self.follows_url.format(user=self.start_user, include=self.follows_query, limit=20, offset=0),self.parse_follows)
         yield Request(self.follows_url.format(user=self.start_user_2, include=self.follows_query, limit=20, offset=0),self.parse_follows)
         yield Request(self.follows_url.format(user=self.start_user_3, include=self.follows_query, limit=20, offset=0),self.parse_follows)
         yield Request(self.follows_url.format(user=self.start_user_4, include=self.follows_query, limit=20, offset=0),self.parse_follows)
+        yield Request(self.follows_url.format(user=self.start_user_5, include=self.follows_query, limit=20, offset=0),self.parse_follows)
+        yield Request(self.follows_url.format(user=self.start_user_6, include=self.follows_query, limit=20, offset=0),self.parse_follows)
         
         yield Request(self.followers_url.format(user=self.start_user, include=self.followers_query, limit=20, offset=0),self.parse_followers)
         yield Request(self.followers_url.format(user=self.start_user_2, include=self.followers_query, limit=20, offset=0),self.parse_followers)
         yield Request(self.followers_url.format(user=self.start_user_3, include=self.followers_query, limit=20, offset=0),self.parse_followers)
         yield Request(self.followers_url.format(user=self.start_user_4, include=self.followers_query, limit=20, offset=0),self.parse_followers)
+        yield Request(self.followers_url.format(user=self.start_user_5, include=self.followers_query, limit=20, offset=0),self.parse_followers)
+        yield Request(self.followers_url.format(user=self.start_user_6, include=self.followers_query, limit=20, offset=0),self.parse_followers)
 
     def parse_user(self, response):
         result = json.loads(response.text)
